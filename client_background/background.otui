@@ -1,0 +1,160 @@
+Panel
+  id: background
+  image-source: /images/background
+  image-smooth: true
+  image-fixed-ratio: true
+  anchors.top: topMenu.bottom
+  anchors.left: parent.left
+  anchors.right: parent.right
+  anchors.bottom: parent.bottom
+  margin-top: 1
+  focusable: false
+  @onClick: g_platform.openUrl("facebook.com/priorityservers/")
+
+  UILabel
+    id: clientVersionLabel
+    background-color: #00000099
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    text-align: center
+    text-auto-resize: true
+    width: 120
+    padding: 2
+    color: #ffffff
+    font: verdana-11px-monochrome
+
+  Button
+    id: clientOptions
+    anchors.right: clientVersionLabel.left
+    anchors.bottom: parent.bottom
+    anchors.top: clientVersionLabel.top
+    width: 60
+    margin-right: 3
+    font: verdana-11px-monochrome
+    icon-source: /images/options
+    @onClick: modules.client_options:show()
+
+    $hover:
+      image-color: #8b8b8b
+      opacity: 0.5
+      background-color: #8b8b8b
+
+  Button
+    id: clientSound
+    anchors.right: clientOptions.left
+    anchors.bottom: clientOptions.bottom
+    anchors.top: clientOptions.top
+    width: 60
+    margin-right: 3
+    font: verdana-11px-monochrome
+    icon-source: /images/sound
+    @onClick: modules.client_options:show()
+
+    $hover:
+      image-color: #8b8b8b
+      opacity: 0.5
+      background-color: #8b8b8b
+
+  Label
+    id: backgroundButtons
+    anchors.top: background.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.right: background.right
+    size: 550 120
+    background-color: black
+    opacity: 0.5
+
+  Button
+    id: web
+    anchors.top: background.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.right: background.right
+    size: 80 80
+    icon-source: /images/website
+    margin-left: -206
+    background-color: alpha
+    @onClick: g_platform.openUrl("priogames.com")
+
+    $hover:
+      image-color: #ffffff
+      background-color: alpha
+
+  Button
+    id: fbLink
+    anchors.top: web.top
+    anchors.left: web.right
+    size: 80 80
+    icon-source: /images/fb
+    margin-left: 4
+    background-color: alpha
+    @onClick: g_platform.openUrl("facebook.com/priorityservers/")
+
+    $hover:
+      image-color: #ffffff
+      background-color: alpha
+
+  Button
+    id: fbGroup
+    anchors.top: fbLink.top
+    anchors.left: fbLink.right
+    size: 80 80
+    margin-left: 4
+    icon-source: /images/fb2
+    background-color: alpha
+    @onClick: g_platform.openUrl("facebook.com/groups/197003917620405/")
+
+    $hover:
+      image-color: #ffffff
+
+  Button
+    id: wiki
+    anchors.top: fbGroup.top
+    anchors.left: fbGroup.right
+    size: 80 80
+    margin-left: 4
+    icon-source: /images/wiki
+    background-color: alpha
+    @onClick: g_platform.openUrl("wiki.priogames.com")
+
+    $hover:
+      image-color: #ffffff
+
+  Button
+    id: ytchannel
+    anchors.top: wiki.top
+    anchors.left: wiki.right
+    size: 80 80
+    margin-left: 4
+    icon-source: /images/yt
+    background-color: alpha
+    @onClick: g_platform.openUrl("youtube.com/vulturgra")
+
+    $hover:
+      image-color: #ffffff
+
+  Button
+    id: support
+    anchors.top: ytchannel.top
+    anchors.left: ytchannel.right
+    size: 80 80
+    margin-left: 4
+    icon-source: /images/support
+    background-color: alpha
+    @onClick: g_platform.openUrl("support.priogames.com")
+
+    $hover:
+      image-color: #ffffff
+
+  Label
+    id: ipTS
+    anchors.top: ytchannel.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.right: background.right
+    margin-top: 10
+    size: 220 20
+    color: white
+    background-color: black
+    opacity: 0.9
+    !text: tr("TeamSpeak3 - PrioGames.com")
+    text-align: center
+    font: magistralic13

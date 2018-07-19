@@ -1,0 +1,268 @@
+EnterGameWindow < MainWindow
+  size: 300 300
+  image-source: /images/entergame
+  image-smooth: false
+  image-fixed-ratio: false
+  --!text: tr('Enter Game')
+  draggable: false
+  margin-top: 140
+
+EnterGameButton < UIButton
+
+ServerListButton < UIButton
+  size: 17 17
+  image-source: /images/topbuttons/minimap
+  image-color: #ffffffff
+
+  $hover !disabled:
+    image-color: #ffffff99
+
+  $pressed:
+    image-color: #ffffff44
+
+  $disabled:
+    image-color: #ffffff55
+
+EnterGameWindow
+  id: enterGame
+  &authenticatorEnabled: false
+  &authenticatorHeight: 44
+  &stayLoggedBoxEnabled: false
+  &stayLoggedBoxHeight: 24
+  @onEnter: EnterGame.doLogin()
+  @onKeyUp: EnterGame.accountAndPasswordPress()
+
+  MenuLabel
+    --!text: tr('Account name')
+    margin-top: 35
+    margin-left: 180
+    anchors.left: parent.left
+    anchors.top: parent.top
+    text-auto-resize: true
+
+  PasswordTextEdit
+    margin-left: 270
+    color: white
+    font: tahoma-15px-bold
+    image-color: alpha
+    id: accountNameTextEdit
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: prev.bottom
+    margin-right: 230
+    margin-top: 121
+    @onKeyUp: EnterGame.accountAndPasswordPress()
+
+  MenuLabel
+    --!text: tr('Password')
+    anchors.left: prev.left
+    anchors.top: prev.bottom
+    margin-top: 8
+    text-auto-resize: true
+
+  PasswordTextEdit
+    margin-left: 270
+    color: white
+    font: tahoma-15px-bold
+    image-color: alpha
+    id: accountPasswordTextEdit
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: prev.bottom
+    margin-right: 230
+    margin-top: 12
+    @onKeyUp: EnterGame.accountAndPasswordPress()
+
+  MenuLabel
+    margin-left: 180
+    id: authenticatorTokenLabel
+    !text: tr('Authenticator Token')
+    anchors.left: prev.left
+    anchors.top: prev.bottom
+    text-auto-resize: true
+    margin-top: -12
+    visible: false
+
+    $on:
+      visible: true
+      margin-top: 8
+
+  TextEdit
+    margin-left: 180
+    id: authenticatorTokenTextEdit
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: prev.bottom
+    margin-top: -22
+    visible: false
+    max-length: 8
+
+    $on:
+      visible: true
+      margin-top: 2
+
+  CheckBox
+    margin-left: 180
+    id: stayLoggedBox
+    !text: tr('Stay logged during session')
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: prev.bottom
+    margin-top: 6
+    margin-top: -16
+    visible: false
+
+    $on:
+      visible: true
+      margin-top: 8
+
+  HorizontalSeparator
+    visible: false
+    margin-left: 180
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: prev.bottom
+    margin-right: 173
+    margin-top: 8
+
+  MenuLabel
+    margin-left: 180
+    id: serverLabel
+    !text: tr('Server')
+    anchors.left: prev.left
+    anchors.top: prev.bottom
+    margin-top: 8
+    text-auto-resize: true
+
+  ServerListButton
+    margin-left: 180
+    id: serverListButton
+    !tooltip: tr('Server list')
+    anchors.right: parent.right
+    anchors.top: serverLabel.bottom
+    margin-top: 3
+    @onClick: ServerList.show()
+
+  TextEdit
+    margin-left: 180
+    id: serverHostTextEdit
+    !tooltip: tr('Make sure that your client uses\nthe correct game client version')
+    anchors.left: parent.left
+    anchors.right: serverListButton.left
+    anchors.top: serverLabel.bottom
+    margin-top: 2
+    margin-right: 4
+
+  MenuLabel
+    margin-left: 180
+    id: clientLabel
+    !text: tr('Client Version')
+    anchors.left: parent.left
+    anchors.top: serverHostTextEdit.bottom
+    text-auto-resize: true
+    margin-right: 10
+    margin-top: 8
+
+  ComboBox
+    margin-left: 180
+    id: clientComboBox
+    anchors.left: parent.left
+    anchors.right: parent.horizontalCenter
+    anchors.top: clientLabel.bottom
+    margin-top: 2
+    margin-right: 3
+    width: 90
+    menu-scroll: true
+    menu-height: 125
+    menu-scroll-step: 25
+
+  MenuLabel
+    margin-left: 180
+    id: portLabel
+    !text: tr('Port')
+    anchors.left: serverPortTextEdit.left
+    anchors.top: serverHostTextEdit.bottom
+    margin-top: 8
+    text-auto-resize: true
+
+  TextEdit
+    margin-left: 260
+    id: serverPortTextEdit
+    text: 7171
+    anchors.right: parent.right
+    anchors.left: parent.horizontalCenter
+    anchors.top: clientComboBox.top
+    margin-left: 3
+    margin-top: 10
+
+  UIButton
+    width: 118
+    margin-right: 216
+    id: forgotPassword
+    image-source: /images/forgotButton
+    anchors.right: parent.right
+    anchors.top: clientComboBox.top
+    !tooltip: tr('Dont remember your account number or password? Recover here')
+    margin-top: 10
+    image-color: #949494
+    @onClick: g_platform.openUrl("priogames.com/#!/lost")
+
+    $hover:
+      image-color: #ffffff
+
+  CheckBox
+    id: rememberPasswordBox
+    margin-left: 216
+    margin-right: 340
+    margin-top: -1
+    !text: tr('Remember me')
+    !tooltip: tr('Remember account and password when starts client')
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: serverPortTextEdit.bottom
+    @onCheckChange: self:getParent():getChildById('autoLoginBox'):setEnabled(self:isChecked())
+
+  CheckBox
+    id: autoLoginBox
+    margin-left: 216
+    margin-right: 340
+    enabled: false
+    !text: tr('Auto login')
+    !tooltip: tr('Open charlist automatically when starting client')
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: prev.bottom
+    margin-top: 2
+
+  HorizontalSeparator
+    visible: false
+    margin-left: 180
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.top: prev.bottom
+    margin-right: 173
+    margin-top: 6
+
+  EnterGameButton
+    width: 139
+    height: 39
+    margin-left: -73
+    --!text: tr('Login')
+    anchors.left: parent.horizontalCenter
+    anchors.top: prev.bottom
+    margin-top: 7
+    image-source: /images/loginButton
+    image-color: #ffffffff
+    @onClick: EnterGame.doLogin()
+
+    $hover:
+      image-color: #a3a3a3
+
+  Label
+    id: serverInfoLabel
+    font: verdana-11px-rounded
+    anchors.top: prev.top
+    anchors.left: parent.left
+    margin-top: 5
+    color: green
+    text-auto-resize: true

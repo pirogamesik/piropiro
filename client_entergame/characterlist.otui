@@ -1,0 +1,200 @@
+PokeballButton < UIButton
+  size: 12 12
+  --image-source: /images/game/pokeball_empty
+  phantom: true
+  focusable: false
+  margin: 2
+  margin-top: 3
+
+HealthBar < ProgressBar
+  id: health
+  background-color: #FF1111
+  anchors.top: parent.top
+  anchors.left: parent.left
+  anchors.right: parent.right
+  margin: 1
+
+ExperienceBar < ProgressBar
+  id: levelPercent
+  background-color: #1144EE
+  anchors.top: prev.bottom
+  anchors.left: parent.left
+  anchors.right: parent.right
+  margin: 1
+  margin-top: 2
+  height: 7
+
+CharacterWidget < UIWidget
+  width: 170
+  padding: 5
+  border: 0 #ffffffff
+  image-source: /images/charoffset
+  background-color: alpha
+  image-color: #b1b0b0
+
+  $focus:
+    image-source: /images/charoffset
+    border: 1 #ff9000
+    image-color: #ffffff
+    background-color: #72CAFD22
+
+  Label
+    id: cloud
+    margin-top: 10
+    size: 85 90
+    image-source: /images/cloud
+    anchors.top: name.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+
+  Label
+    id: effectDymu
+    size: 140 117
+    padding: 3
+    margin-top: -23
+    anchors.top: name.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    background-color: alpha
+
+  Label
+    id: name
+    color: #ffffff
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    font: verdana-11px-monochrome
+    text-auto-resize: true
+    image-source: /images/textBorder
+    background-color: alpha
+    margin-top: 8
+
+  HealthBar
+    margin-top: 3
+    anchors.top: name.bottom
+    margin-left: 44
+    margin-right: 44
+    height: 6
+
+  ExperienceBar
+    anchors.top: health.bottom
+    margin-top: 2
+    margin-left: 44
+    margin-right: 44
+    height: 6
+
+  UICreature
+    id: outfit
+    size: 75 75
+    padding: 3
+    margin-top: 18
+    anchors.top: name.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    background-color: alpha
+    border: 0 #ffffffff
+
+  Label
+    id: effect
+    size: 75 75
+    padding: 3
+    margin-top: 18
+    anchors.top: name.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    background-color: alpha
+
+  Label
+    id: worldName
+    margin-top: 10
+    color: #ffffff
+    anchors.top: prev.bottom
+    anchors.horizontalCenter: parent.horizontalCenter
+    font: verdana-11px-monochrome
+    text-auto-resize: true
+    background-color: alpha
+
+  Label
+    id: level
+    color: #ffffff
+    anchors.top: prev.bottom
+    anchors.horizontalCenter: name.horizontalCenter
+    font: verdana-11px-monochrome
+    text-auto-resize: true
+    background-color: alpha
+
+MainWindow
+  id: charactersWindow
+  !text: tr('Character List')
+  font: magistralic13
+  // size: 370 400
+  size: 544 300
+  visible: false
+  @onEnter: CharacterList.doLogin()
+  @onEscape: CharacterList.hide(true)
+  @onSetup: |
+    g_keyboard.bindKeyPress('Left', function() self:getChildById('characters'):focusPreviousChild(KeyboardFocusReason) end, self)
+    g_keyboard.bindKeyPress('Right', function() self:getChildById('characters'):focusNextChild(KeyboardFocusReason) end, self)
+
+  HorizontalList
+    id: characters
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: accountStatusCaption.top
+    margin-bottom: 18
+    padding: 1
+    background-color: #3f3f3f
+    focusable: false
+    horizontal-scrollbar: characterListScrollBar
+    auto-focus: first
+
+  HorizontalScrollBar
+    id: characterListScrollBar
+    anchors.left: parent.left
+    anchors.bottom: accountStatusCaption.top
+    anchors.right: parent.right
+    margin-bottom: 5
+    step: 170
+    pixels-scroll: true
+
+  Label
+    id: accountStatusCaption
+    !text: tr('Account Status') .. ':'
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: next.top
+    margin-bottom: 1
+
+  Label
+    id: accountStatusLabel
+    !text: tr('Free Account')
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: separator.top
+    margin-bottom: 5
+    text-auto-resize: true
+
+    $on:
+      color: #FF0000
+
+  HorizontalSeparator
+    id: separator
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: next.top
+    margin-bottom: 10
+
+  Button
+    id: buttonOk
+    color: green
+    !text: tr('Play')
+    width: 64
+    anchors.right: parent.horizontalCenter
+    anchors.bottom: parent.bottom
+    margin-right: 0
+    @onClick: CharacterList.doLogin()
+
+  Button
+    id: buttonCancel
+    !text: tr('Cancel')
+    color: #ea5454
+    width: 64
+    anchors.left: prev.right
+    anchors.bottom: parent.bottom
+    @onClick: CharacterList.hide(true)
