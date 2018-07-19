@@ -1,0 +1,159 @@
+ButtonShop < UIButton
+  font: verdana-11px-antialised
+  color: #dfdfdfff
+  size: 92 22
+  text-offset: 0 0
+  image-source: /images/shop/buttonShop
+  image-color: #dfdfdf
+  image-clip: 0 0 24 22
+  image-border: 7
+  padding: 5 10 5 10
+  opacity: 1.0
+
+  $hover !disabled:
+    image-clip: 0 22 24 22
+
+  $pressed:
+    image-clip: 0 44 24 22
+
+  $disabled:
+    color: #dfdfdf88
+    opacity: 0.8
+
+MainWindow
+  id: storeWindow
+  size: 360 162
+  padding: 3
+  border: 1 #039be5
+  image-color: #00000000
+  background-color: #00000077
+  visible: false
+
+  Label
+    id: transferPointsLabel
+    !text: tr('Transfer Points')
+    text-align: center
+    font: verdana-11px-antialised
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    background-color: #00000077
+    border: 1 #039be5
+    height: 20
+  
+  Label
+    id: descriptionText
+    !text: tr('Please select the amount of Tibia Coins you wish to transfer and enter the name of the character that should receive the Tibia Coins.')
+    font: terminus-10px
+    text-wrap: true
+    text-auto-resize:true
+    anchors.top: transferPointsLabel.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    margin: 3
+
+  Label
+    id: recipient
+    font: terminus-10px
+    !text: tr('Recipient:')
+    anchors.top: descriptionText.bottom
+    anchors.left: parent.left
+    size: 57 12
+    margin: 3
+    margin-top: 10
+
+  TextEdit
+    id: transferPointsText
+    anchors.top: recipient.top
+    anchors.right: parent.right
+    width: 140
+    font: terminus-10px
+    margin: 3
+    margin-top: -5
+    background-color: #00000055
+    border: 1 #039be5
+    image-color: #ffffff00
+    color: #039be5
+    selection-color: #ffffff
+    selection-background-color: #039be5
+
+  Label
+    id: transferAmount
+    font: terminus-10px
+    !text: tr('Amount to transfer:')
+    anchors.top: transferPointsText.bottom
+    anchors.left: parent.left
+    size: 180 12
+    margin: 3
+    margin-top: 10
+
+  TextEdit
+    id: transferPointsValue
+    anchors.top: transferAmount.top
+    anchors.right: parent.right
+    width: 90
+    font: terminus-10px
+    margin: 3
+    margin-top: -5
+    background-color: #00000055
+    border: 1 #039be5
+    image-color: #ffffff00
+    color: #039be5
+    selection-color: #ffffff
+    selection-background-color: #039be5
+
+  Label
+    id: transferableAmount
+    font: terminus-10px
+    !text: tr('Transferable Tibia Coins:')
+    anchors.top: transferAmount.bottom
+    anchors.left: parent.left
+    size: 155 12
+    margin: 3
+    margin-top: 10
+
+  Label
+    id: coinBalance2
+    font: terminus-10px
+    anchors.top: transferableAmount.top
+    anchors.left: transferableAmount.right
+    height: 12
+    margin-left: 3
+
+  Label
+    id: coinIcon
+    image-source: /images/shop/tibiaCoin
+    anchors.top: coinBalance2.top
+    anchors.left: coinBalance2.right
+    margin-left: 3
+    size: 12 12
+
+  Label
+    background-color: #00000077
+    border: 1 #039be5
+    height: 28
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+
+  ButtonShop
+    id: closeButton
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.bottom: parent.bottom
+    margin-left: 35
+    margin-bottom: 3
+    !text: tr('Cancel')
+    width: 50
+    color: #ffffff
+    @onClick: transferCancel()
+
+  ButtonShop
+    id: buttonOk
+    anchors.right: closeButton.left
+    anchors.bottom: parent.bottom
+    margin-right: 10
+    margin-bottom: 3
+    !text: tr('Transfer')
+    width: 65
+    color: #ffffff
+    @onClick: transferAccept()

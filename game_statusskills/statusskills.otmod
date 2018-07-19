@@ -1,0 +1,9 @@
+Module
+  name: game_statusskills
+  description: Status skills window
+  author: Vultur
+  website: https://github.com/edubart/otclient
+  sandboxed: true
+  scripts: [ statusskills ]
+  @onLoad: init()
+  @onUnload: terminate()

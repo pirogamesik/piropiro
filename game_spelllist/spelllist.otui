@@ -1,0 +1,263 @@
+SpellListLabel < Label
+  font: verdana-11px-monochrome
+  background-color: alpha
+  text-offset: 42 3
+  focusable: true
+  height: 36
+  image-clip: 0 0 32 32
+  image-size: 32 32
+  image-offset: 2 2
+  image-source: /images/game/spells/defaultspells
+
+  $focus:
+    background-color: #ffffff22
+    color: #ffffff
+
+SpellInfoLabel < Label
+  width: 70
+  font: verdana-11px-monochrome
+  text-align: right
+  margin-left: 10
+  margin-top: 5
+
+SpellInfoValueLabel < Label
+  text-align: left
+  width: 190
+  margin-left: 10
+  margin-top: 5
+
+FilterButton < Button
+  width: 64
+  anchors.left: prev.right
+  anchors.top: spellList.bottom
+  @onClick: toggleFilter(self)
+  margin: 5 0 0 6
+  color: #630000
+  $on:
+    color: green
+
+MainWindow
+  id: spelllistWindow
+  !text: tr('Spell List')
+  size: 700 450
+  @onEscape: toggle()
+
+  TextList
+    id: spellList
+    vertical-scrollbar: spellsScrollBar
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.bottom: next.top
+    margin-bottom: 10
+    padding: 1
+    width: 210
+    focusable: false
+
+  Button
+    id: buttonCancel
+    !text: tr('Close')
+    width: 64
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    @onClick: toggle()
+
+  VerticalScrollBar
+    id: spellsScrollBar
+    anchors.top: spellList.top
+    anchors.bottom: spellList.bottom
+    anchors.right: spellList.right
+    step: 50
+    pixels-scroll: true
+
+  Label
+    id: spellPreview
+    anchors.left: spellList.right
+    anchors.right: parent.right
+    anchors.top: spellList.top
+    height: 170
+    image-source: /images/game/spells/none
+
+  SpellInfoLabel
+    id: labelName
+    anchors.left: spellList.right
+    anchors.top: spellList.top
+    margin-top: 175
+    !text: tr('Name') .. ':'
+
+  Label
+    anchors.left: parent.left
+    anchors.top: spellList.bottom
+    !text: tr('Filters') .. ':'
+    margin-top: 8
+
+  FilterButton
+    id: buttonFilterLevel
+    !text: tr('Level')
+    !tooltip: tr('Hide spells for higher exp. levels')
+
+  FilterButton
+    id: buttonFilterVocation
+    !text: tr('All Spells')
+    !tooltip: tr('Hide spells for other professions')
+
+  SpellInfoLabel
+    id: labelFormula
+    anchors.left: spellList.right
+    anchors.top: labelName.bottom
+    !text: tr('Formula') .. ':'
+
+  SpellInfoLabel
+    visible: false
+    id: labelVocation
+    anchors.left: spellList.right
+    anchors.top: labelFormula.bottom
+    !text: tr('Profession') .. ':'
+
+  SpellInfoLabel
+    id: labelLevel
+    anchors.left: spellList.right
+    anchors.top: labelFormula.bottom
+    !text: tr('Level') .. ':'
+
+  SpellInfoLabel
+    id: labelTp
+    anchors.left: spellList.right
+    anchors.top: labelLevel.bottom
+    !text: tr('TP') .. ':'
+
+  SpellInfoLabel
+    id: labelMana
+    anchors.left: spellList.right
+    anchors.top: labelTp.bottom
+    !text: tr('Ki') .. ' / ' .. tr('Rage') .. ':'
+
+  SpellInfoLabel
+    id: labelCooldown
+    anchors.left: spellList.right
+    anchors.top: labelMana.bottom
+    !text: tr('Cooldown') .. ':'
+
+  SpellInfoLabel
+    id: labelGroup
+    anchors.left: spellList.right
+    anchors.top: labelCooldown.bottom
+    !text: tr('Group') .. ':'
+
+  SpellInfoLabel
+    id: labelDescription
+    anchors.left: spellList.right
+    anchors.top: labelGroup.bottom
+    !text: tr('Description') .. ':'
+
+  SpellInfoValueLabel
+    id: labelNameValue
+    anchors.left: labelName.right
+    anchors.top: spellList.top
+    margin-top: 175
+
+  SpellInfoValueLabel
+    id: labelFormulaValue
+    anchors.left: labelFormula.right
+    anchors.top: labelNameValue.bottom
+
+  SpellInfoValueLabel
+    visible: false
+    id: labelVocationValue
+    anchors.left: labelVocation.right
+    anchors.top: labelFormulaValue.bottom
+
+  SpellInfoValueLabel
+    id: labelLevelValue
+    anchors.left: labelLevel.right
+    anchors.top: labelFormulaValue.bottom
+
+  SpellInfoValueLabel
+    id: labelTpValue
+    anchors.left: labelLevel.right
+    anchors.top: labelLevelValue.bottom
+
+  SpellInfoValueLabel
+    id: labelManaValue
+    anchors.left: labelMana.right
+    anchors.top: labelTpValue.bottom
+
+  SpellInfoValueLabel
+    id: labelCooldownValue
+    anchors.left: labelCooldown.right
+    anchors.top: labelManaValue.bottom
+
+  SpellInfoValueLabel
+    id: labelGroupValue
+    anchors.left: labelGroup.right
+    anchors.top: labelCooldownValue.bottom
+
+  SpellInfoValueLabel
+    id: labelDescriptionValue
+    anchors.left: labelDescription.right
+    anchors.top: labelGroupValue.bottom
+
+  Label
+    visible: false
+    id: labelGroupFilter
+    anchors.top: labelDescriptionValue.bottom
+    anchors.left: spellList.right
+    width: 45
+    font: verdana-11px-monochrome
+    !text: tr('Group: ')
+    color: yellow
+    margin-top: 25
+    margin-left: 15
+
+  CheckBox
+    visible: false
+    id: groupBoxAny
+    anchors.left: prev.right
+    anchors.top: prev.top
+    margin-left: 3
+    !text: tr('Any')
+    width: 50
+
+  CheckBox
+    visible: false
+    id: groupBoxAttack
+    anchors.left: prev.right
+    anchors.top: prev.top
+    !text: tr('Attack')
+    width: 70
+
+  CheckBox
+    visible: false
+    id: groupBoxHealing
+    anchors.left: prev.right
+    anchors.top: prev.top
+    !text: tr('Healing')
+    width: 70
+
+  CheckBox
+    visible: false
+    id: groupBoxSupport
+    anchors.left: prev.right
+    anchors.top: prev.top
+    !text: tr('Support')
+    width: 75
+
+  Button
+    id: cpToCb
+    anchors.left: spellList.right
+    anchors.top: prev.top
+    color: green
+    !text: tr('Copy to clipboard')
+    width: 140
+    margin-top: -5
+    margin-left: 10
+    @onClick: copyCB()
+
+  Button
+    id: hotkeyOpen
+    anchors.left: cpToCb.right
+    anchors.top: cpToCb.top
+    color: orange
+    !text: tr('Open Hotkeys')
+    width: 140
+    margin-left: 10
+    @onClick: modules.game_hotkeys.toggle()

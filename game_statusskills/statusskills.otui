@@ -1,0 +1,241 @@
+SkillFirstWidget < UIWidget
+
+SkillButton < UIButton
+  height: 22
+  margin-bottom: 2
+  &onClick: onSkillButtonClick
+
+StatusSkillButton < UIButton
+  height: 22
+  margin-bottom: 2
+
+SkillsInfo < UIButton
+  height: 32
+  margin-bottom: 2
+
+SkillLabel < UIButton
+  height: 12
+  margin-bottom: 2
+
+SmallSkillButton < SkillButton
+  height: 14
+
+SkillNameLabel < GameLabel
+  font: verdana-11px-monochrome
+  anchors.left: parent.left
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+
+StatusSkillNameLabel < GameLabel
+  font: verdana-11px-monochrome
+  anchors.left: parent.left
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  margin-top: 4
+
+StatusSkillsValueLabel < GameLabel
+  id: value
+  font: verdana-11px-monochrome
+  text-align: topright
+  anchors.right: parent.right
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  anchors.left: prev.left
+  margin-top: 4
+  margin-right: 30
+
+StatusSkillsValueButton < UIButton
+  id: valueAdd
+  font: verdana-11px-monochrome
+  margin-top: 3
+  margin-bottom: 3
+  width: 17
+  text-align: topright
+  anchors.right: parent.right
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  image-source: /images/game/status/plus
+  image-color: #ffffff
+  enabled: false
+  opacity: 0.3
+  &onClick: onAddStatusPointsToSkill
+
+  $hover:
+    image-color: #d5d3d3
+
+StatusSkillsRemoveButton < UIButton
+  id: valueRemove
+  font: verdana-11px-monochrome
+  margin-top: 3
+  margin-bottom: 3
+  margin-right: 53
+  width: 17
+  text-align: topright
+  anchors.right: parent.right
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  image-source: /images/game/status/minus
+  image-color: #ffffff
+  enabled: false
+  opacity: 0.3
+  &onClick: onRemoveStatusPointsToSkill
+  
+  $hover:
+    image-color: #d5d3d3
+
+SkillsName < GameLabel
+  font: verdana-11px-monochrome
+  anchors.left: parent.left
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  margin-left: 40
+  margin-top: 5
+
+SkillsValueLabel < GameLabel
+  id: value
+  font: verdana-11px-monochrome
+  text-align: topright
+  anchors.right: parent.right
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  anchors.left: prev.left
+  margin-top: 5
+  
+SkillsRemoveName < GameLabel
+  font: verdana-10px-monochrome
+  anchors.left: parent.left
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  margin-left: 40
+  margin-top: 20
+
+SkillsRemoveValueLabel < GameLabel
+  id: value2
+  font: verdana-10px-monochrome
+  text-align: topright
+  anchors.right: parent.right
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  anchors.left: prev.left
+  margin-top: 20
+
+SkillValueLabel < GameLabel
+  id: value
+  font: verdana-11px-monochrome
+  text-align: topright
+  anchors.right: parent.right
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  anchors.left: prev.left
+
+SkillPercentPanel < ProgressBar
+  id: percent
+  background-color: green
+  height: 5
+  margin-top: 15
+  anchors.left: parent.left
+  anchors.right: parent.right
+  anchors.top: parent.top
+  phantom: false
+
+MiniWindow
+  id: statusSkillsWindow
+  !text: tr('Status Skills')
+  height: 100
+  icon: /images/topbuttons/statusskills
+  @onClose: modules.game_statusskills.onMiniWindowClose()
+  &save: true
+
+  MiniWindowContents
+    padding-left: 5
+    padding-right: 5
+    layout: verticalBox
+
+    SkillsInfo
+      margin-top: 5
+      id: level
+      SkillNameLabel
+        image-source: /images/game/status/status
+      SkillsName
+        !text: tr('Status Points: ')
+        color: #00ff00
+      SkillsValueLabel
+        !text: tr('0')
+        color: #8dfc8d
+      SkillsRemoveName
+        !text: tr('Minus Points: ')
+        color: #fb2121
+      SkillsRemoveValueLabel
+        !text: tr('0')
+        color: #ff5a5a
+
+    SkillLabel
+      id: labelSkills
+      background-color: #636262
+      height: 1
+      margin-top: 10
+      margin-bottom: 10
+
+    StatusSkillButton
+      id: agility
+      StatusSkillNameLabel
+        !text: tr('Agility')
+      StatusSkillsValueLabel
+        !text: tr('10')
+      StatusSkillsValueButton
+      StatusSkillsRemoveButton
+
+    StatusSkillButton
+      id: power
+      StatusSkillNameLabel
+        !text: tr('Power')
+      StatusSkillsValueLabel
+        !text: tr('22')
+      StatusSkillsValueButton
+      StatusSkillsRemoveButton
+
+    StatusSkillButton
+      id: ki force
+      StatusSkillNameLabel
+        !text: tr('Ki Force')
+      StatusSkillsValueLabel
+        !text: tr('0')
+      StatusSkillsValueButton
+      StatusSkillsRemoveButton
+
+    StatusSkillButton
+      id: vitality
+      !tooltip: tr('Every skill give you +100 Max Powerlevel.\nNow you have +1300 Max Powerlevel from this skill.')
+      StatusSkillNameLabel
+        !text: tr('Vitality')
+      StatusSkillsValueLabel
+        !text: tr('13')
+      StatusSkillsValueButton
+      StatusSkillsRemoveButton
+
+    StatusSkillButton
+      id: critical
+      StatusSkillNameLabel
+        !text: tr('Critical')
+      StatusSkillsValueLabel
+        !text: tr('15')
+      StatusSkillsValueButton
+      StatusSkillsRemoveButton
+
+    StatusSkillButton
+      id: dexterity
+      StatusSkillNameLabel
+        !text: tr('Dexterity')
+      StatusSkillsValueLabel
+        !text: tr('44')
+      StatusSkillsValueButton
+      StatusSkillsRemoveButton
+
+    StatusSkillButton
+      id: regeneration
+      StatusSkillNameLabel
+        !text: tr('Regeneration')
+      StatusSkillsValueLabel
+        !text: tr('99')
+      StatusSkillsValueButton
+      StatusSkillsRemoveButton

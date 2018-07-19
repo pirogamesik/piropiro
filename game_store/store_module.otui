@@ -1,0 +1,382 @@
+StoreButton < UIButton
+  font: verdana-11px-antialised
+  text-offset: 29 0
+  text-align: left
+  image-source: ui/headlinebutton
+  size: 60 30
+  icon-rect: 4 0 24 24
+  image-color: #aeaeae
+  opacity: 1
+  $focus: 
+    color: #ffffff
+    image-color: #ff003c
+    opacity: 0.7
+
+  $hover focus:
+    color: #ffffff
+    image-color: #ff003c
+    opacity: 0.7
+
+  $hover !focus:
+    color: #ffffff
+    image-color: #ffde00
+    background-color: #ffde00
+    opacity: 0.9
+
+  $hover !checked:
+    color: #ffffff
+    image-color: #ffde00
+    background-color: #ffde00
+    opacity: 0.9
+
+  $disabled:
+    background-color: alpha
+    color: #ffffff22
+    image-color: #ffde00
+    background-color: #ffde00
+    opacity: 0.9
+
+  $checked:
+    color: #ffffff
+    image-color: #ffde00
+    background-color: #ffde00
+    opacity: 0.9
+
+  $on !checked:
+    color: #ffffff
+    image-color: #ffde00
+    background-color: #ffde00
+    opacity: 0.9
+
+ProductButton < UIButton
+  font: verdana-11px-antialised
+  text-align: left
+  background-color: #00000022
+  size: 96 114
+  border: 1 #545454
+  margin-right: 2
+  margin-bottom: 2
+  $hover:
+    border: 1 #ffba00
+    background-color: #00000077
+
+  Label
+    id: productLabelTitle
+    text-align: center
+    text-offset: 0 0
+    anchors.top: parent.top
+    anchors.right: parent.right
+    anchors.left: parent.left
+    margin: 3
+    border: 1 #545454
+    height: 16
+    background-color: #00000077
+
+  CreatureCustom
+    id: outfitBefore
+    size: 0 0
+    anchors.top: productLabelTitle.bottom
+    anchors.right: parent.right
+    anchors.left: parent.left
+    background-color: alpha
+    margin-top: 5
+    margin-left: -10
+    margin-right: 10
+    fixed-creature-size: false
+
+  Label
+    id: productLabelImage
+    anchors.top: productLabelTitle.bottom
+    anchors.right: parent.right
+    anchors.left: parent.left
+    margin: 3
+    size: 88 70
+    margin: 5 15 5 10
+
+  CreatureCustom
+    id: outfitAfter
+    size: 0 0
+    anchors.top: productLabelTitle.bottom
+    anchors.right: parent.right
+    anchors.left: parent.left
+    background-color: alpha
+    margin-top: 5
+    margin-left: -10
+    margin-right: 10
+    fixed-creature-size: false
+
+  Label
+    id: productSpecialImage
+    anchors.top: productLabelTitle.bottom
+    anchors.right: parent.right
+    size: 50 50
+    margin-left: 5
+
+  Label
+    id: productLabelTokenPrice
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    anchors.left: parent.left
+    text-align: center
+    text-offset: 0 0
+    margin: 3
+    border: 1 #545454
+    height: 16
+    font: magistralic13
+    background-color: #00000077
+
+  Label
+    id: coinIcon
+    image-source: /images/shop/pgCoin
+    anchors.top: productLabelTokenPrice.top
+    anchors.left: parent.left
+    margin-left: 5
+    margin-top: 2
+    size: 12 12
+    opacity: 1.0
+
+ButtonShop < UIButton
+  font: verdana-11px-antialised
+  color: #dfdfdfff
+  size: 92 22
+  text-offset: 0 0
+  image-color: #dfdfdf
+  image-border: 7
+  opacity: 1.0
+
+  $hover !disabled:
+    image-color: #00a404
+    opacity: 0.95
+
+  $pressed:
+    image-color: #00a404
+    opacity: 0.95
+
+  $disabled:
+    image-color: #00a404
+    opacity: 0.95
+
+MainWindow
+  id: storeWindow
+  size: 700 486
+  padding: 3
+  border: 1 #545454
+
+  @onEnter: modules.game_store.onCloseStore()
+  @onEscape: modules.game_store.onCloseStore()
+
+  Label
+    id: title
+    image-source: ui/headline
+    !text: tr('Store')
+    text-align: center
+    font: verdana-11px-antialised
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    background-color: #00000077
+    font: magistralic13
+    border: 1 #545454
+    height: 20
+  
+  Panel
+    id: balanceInfo
+    anchors.top: title.bottom
+    anchors.right: parent.right
+    margin-top: 3
+    size: 155 55
+    border: 1 #545454
+    background-color: #00000077
+    image-source: ui/headline
+    padding: 5
+    align: center
+
+    Label
+      id: textYbalance
+      text-offset: 0 -3
+      !text: tr('Your current balance:')
+      color: #90ee90
+      font: magistralic13
+      text-align: center
+      anchors.top: parent.top
+      anchors.left: parent.left
+
+    Label
+      id: coinBalance
+      font: magistralic13
+      !text: tr('55550')
+      anchors.top: textYbalance.bottom
+      anchors.left: parent.left
+      color: yellow
+      height: 12
+      margin-top: 11
+      margin-left: 10
+
+    Label
+      id: coinIcon
+      image-source: /images/shop/pgCoin
+      anchors.top: coinBalance.top
+      anchors.left: coinBalance.right
+      margin-left: 3
+      size: 12 12
+
+  ButtonShop
+    id: getCoins
+    !text: tr('Buy ')
+    image-source: ui/headlinebutton
+    image-color: #42ff00
+    tooltip: Get Premium Points
+    text-offset: -7 0
+    width: 75
+    color: #ffffff
+    margin-left: 3
+    margin-right: 3
+    anchors.top: balanceInfo.top
+    anchors.right: balanceInfo.right
+    icon-rect: 54 5 12 12
+    icon-source: /images/shop/pgCoin
+    margin-top: 25
+    @onClick: modules.game_store.getCoins()
+
+  Panel
+    id: indexDescription
+    size: 507 78
+    border: 1 #545454
+    background-color: #00000077
+    anchors.top: balanceInfo.top
+    anchors.left: balanceInfo.right
+    margin-left: 3
+    visible: false
+
+    Label
+      id: imageDesc
+      anchors.top: parent.top
+      anchors.right: parent.right
+      anchors.left: parent.left
+      size: 64 64
+      margin-top: 7
+      margin-left: 10
+
+    Label
+      id: titleDesc
+      font: magistralic13
+      anchors.top: imageDesc.top
+      anchors.left: imageDesc.right
+      width: 64
+      margin-left: 10
+      margin-top: 12
+      text-wrap: true
+      text-auto-resize:true
+
+    Label
+      id: description
+      font: magistralic13
+      text-wrap: true
+      text-auto-resize:true
+      anchors.top: titleDesc.bottom
+      anchors.left: imageDesc.right
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      margin-left: 10
+      margin-top: 5
+
+  Label
+    id: categories
+    image-source: ui/headline
+    text-offset: 5 3
+    !text: tr('Choose a categorie:')
+    anchors.top: balanceInfo.top
+    anchors.left: parent.left
+    font: magistralic13
+    background-color: #00000077
+    border: 1 #545454
+    color: #ffa500
+    size: 533 55
+    margin-top: 0
+    margin-left: 3
+
+  TextList
+    id: indexList
+    anchors.top: categories.top
+    anchors.left: categories.left
+    size: 527 30
+    margin-left: 2
+    margin-top: 20
+    layout:
+      type: grid
+      flow: true
+      cell-size: 105 30
+
+  Label
+    id: products
+    text-offset: 5 3
+    image-source: ui/headline
+    !text: tr('Products:')
+    anchors.top: indexList.bottom
+    anchors.left: categories.left
+    font: magistralic13
+    size: 683 21
+    margin-left: 5
+    margin-top: 10
+
+  ScrollablePanel
+    id: productList
+    anchors.top: products.bottom
+    anchors.left: categories.left
+    image-source: ui/headline
+    size: 688 344
+    border: 1 #545454
+    padding: 3
+    padding-right: 10
+    background-color: #00000077
+    margin-top: 4
+    margin-left: 3
+    vertical-scrollbar: productListScrollbar
+    layout:
+      type: grid
+      flow: true
+      cell-size: 96 114
+
+  VerticalScrollBar
+    id: productListScrollbar
+    height: 323
+    margin-top: 1
+    margin-right: 1
+    anchors.top: productList.top
+    anchors.right: productList.right
+    step: 14
+    pixels-scroll: true
+
+  Label
+    background-color: #00000077
+    border: 1 #545454
+    height: 28
+    image-source: ui/headline
+    image-clip: 0 0 20 20
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+
+  ButtonShop
+    id: closeButton
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.bottom: parent.bottom
+    margin-bottom: 3
+    image-source: ui/headlinebutton
+    image-color: red
+    !text: tr('Close')
+    width: 49
+    color: #ffffff
+    @onClick: modules.game_store.toggle()
+
+    $hover !disabled:
+      image-color: #ce0707
+      opacity: 0.95
+
+    $pressed:
+      image-color: #ce0707
+      opacity: 0.95
+
+    $disabled:
+      image-color: #ce0707
+      opacity: 0.95

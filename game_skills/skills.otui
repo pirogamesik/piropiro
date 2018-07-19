@@ -1,0 +1,212 @@
+SkillFirstWidget < UIWidget
+
+SkillButton < UIButton
+  height: 21
+  margin-bottom: 2
+  &onClick: onSkillButtonClick
+  
+SkillLabel < UIButton
+  height: 12
+  margin-bottom: 2
+
+SmallSkillButton < SkillButton
+  height: 14
+
+SkillNameLabel < GameLabel
+  font: verdana-11px-monochrome
+  anchors.left: parent.left
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+
+SkillValueLabel < GameLabel
+  id: value
+  font: verdana-11px-monochrome
+  text-align: topright
+  anchors.right: parent.right
+  anchors.top: parent.top
+  anchors.bottom: parent.bottom
+  anchors.left: prev.left
+
+SkillPercentPanel < ProgressBar
+  id: percent
+  background-color: green
+  height: 5
+  margin-top: 15
+  anchors.left: parent.left
+  anchors.right: parent.right
+  anchors.top: parent.top
+  phantom: false
+
+MiniWindow
+  id: skillWindow
+  !text: tr('Classic Skills')
+  height: 150
+  icon: /images/topbuttons/skills
+  @onClose: modules.game_skills.onMiniWindowClose()
+  &save: true
+
+  MiniWindowContents
+    padding-left: 5
+    padding-right: 5
+    layout: verticalBox
+
+    SkillButton
+      margin-top: 5
+      id: level
+      SkillNameLabel
+        !text: tr('Level')
+      SkillValueLabel
+      SkillPercentPanel
+        background-color: red
+
+    SkillButton
+      id: regenerationTime
+      SkillNameLabel
+        !text: tr('Regeneration Time')
+      visible: false
+      SkillValueLabel
+
+    SkillButton
+      id: magiclevel
+      SkillNameLabel
+        !text: tr('Ki Level')
+      SkillValueLabel
+      SkillPercentPanel
+        background-color: #00bff3
+
+    SkillLabel
+      id: labelStamina
+      background-color: #636262
+      height: 1
+      margin-top: 10
+      margin-bottom: 10
+
+    SkillButton
+      id: stamina
+      SkillNameLabel
+        !text: tr('Stamina')
+      !tooltip: tr('Stamina regenerate every day.\n if you lost some stamina you can restore it from magazine by command !stamina')
+      SkillValueLabel
+      SkillPercentPanel
+        background-color: #630460
+
+    SkillButton
+      id: speed
+      height: 15
+      SkillNameLabel
+        !text: tr('Movement Speed')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: karma
+      !tooltip: tr('You can reduce karma by killing monsters or go to Dende and reduce it by zennis.')
+      SkillNameLabel
+        !text: tr('Karma')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: balance
+      @onClick: modules.game_interface.withdrawMoneyFromBank()
+      SkillNameLabel
+        !text: tr('Balance')
+      SkillValueLabel
+
+    Button
+      id: balanceWithdraw
+      @onClick: modules.game_interface.withdrawMoneyFromBank()
+      !text: tr('Withdraw')
+      font: verdana-11px-monochrome
+      color: green
+      height: 16
+
+    SkillLabel
+      id: labelStamina
+      background-color: #636262
+      height: 1
+      margin-top: 10
+      margin-bottom: 10
+
+    SkillButton
+      id: skillId0
+      SkillNameLabel
+        !text: tr('Attack Speed')
+      SkillValueLabel
+      SkillPercentPanel
+
+    SkillButton
+      id: skillId1
+      SkillNameLabel
+        !text: tr('Train Points')
+      SkillValueLabel
+      SkillPercentPanel
+
+    SkillButton
+      id: skillId2
+      SkillNameLabel
+        !text: tr('Sword Fighting')
+      SkillValueLabel
+      SkillPercentPanel
+
+    SkillButton
+      id: skillId3
+      SkillNameLabel
+        !text: tr('Strength')
+      SkillValueLabel
+      SkillPercentPanel
+
+    SkillButton
+      id: skillId4
+      SkillNameLabel
+        !text: tr('Ki Blasting')
+      SkillValueLabel
+      SkillPercentPanel
+
+    SkillButton
+      id: skillId5
+      SkillNameLabel
+        !text: tr('Defense')
+      SkillValueLabel
+      SkillPercentPanel
+
+    SkillButton
+      id: skillId6
+      SkillNameLabel
+        !text: tr('Energy')
+      SkillValueLabel
+      SkillPercentPanel
+
+    SmallSkillButton
+      id: skillId7
+      SkillNameLabel
+        !text: tr('Critical Hit Chance')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId8
+      SkillNameLabel
+        !text: tr('Critical Hit Damage')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId9
+      SkillNameLabel
+        !text: tr('Life Leech Chance')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId10
+      SkillNameLabel
+        !text: tr('Life Leech Amount')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId11
+      SkillNameLabel
+        !text: tr('Life Leech Chance')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId12
+      SkillNameLabel
+        !text: tr('Life Leech Amount')
+      SkillValueLabel
