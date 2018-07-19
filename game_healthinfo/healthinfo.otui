@@ -1,0 +1,53 @@
+HealthBar < ProgressBar
+  id: healthBar
+  width: 170
+  background-color: #af0000
+  anchors.top: parent.top
+  anchors.left: parent.left
+  anchors.right: parent.right
+  margin: 1
+
+ManaBar < ProgressBar
+  id: manaBar
+  width: 170
+  background-color: #004bf6
+  anchors.top: prev.bottom
+  anchors.left: parent.left
+  anchors.right: parent.right
+  margin: 1
+  margin-top: 3
+
+ExperienceBar < ProgressBar
+  id: experienceBar
+  width: 170
+  background-color: yellow
+  anchors.top: prev.bottom
+  anchors.left: parent.left
+  anchors.right: parent.right
+  margin: 1
+  margin-top: 3
+
+MiniWindow
+  icon: /images/topbuttons/healthinfo
+  id: healthInfoWindow
+  !text: tr('Health Info')
+  height: 79
+  @onClose: modules.game_healthinfo.onMiniWindowClose()
+  &save: true
+
+  Label
+    text: "~"
+    text-align: center
+    color: #888888
+    phantom: false
+    !tooltip: tr('Change panel')
+    anchors.top: minimizeButton.top
+    anchors.right: minimizeButton.left
+    margin-right: 3
+    size: 14 14
+    @onClick: modules.game_healthinfo.changePanel()
+
+  MiniWindowContents
+    HealthBar
+    ManaBar
+    ExperienceBar

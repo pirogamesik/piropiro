@@ -1,0 +1,109 @@
+PlayerBar < Label
+  anchors.top: PlayerBarWindow.top
+  image-source: /images/playerBar4
+  size: 282 95
+
+HealthBar2 < ProgressBar
+  id: healthBar2
+  width: 138
+  background-color: #fa0000
+  anchors.top: parent.top
+  anchors.left: parent.left
+  anchors.right: parent.right
+
+HealthBackground < Label
+  id: HealthBackground
+  image-source: /images/textBorder
+  width: 138
+  background-color: #fa0000
+  anchors.top: parent.top
+  anchors.left: parent.left
+  anchors.right: parent.right
+
+ManaBar2 < ProgressBar
+  id: manaBar2
+  width: 138
+  background-color: #1f63ff
+  anchors.top: prev.bottom
+  anchors.left: parent.left
+  anchors.right: parent.right
+  
+ManaBackground < Label
+  id: ManaBackground
+  image-source: /images/textBorder
+  width: 138
+  background-color: #1f63ff
+  anchors.top: manaBar2.top
+  anchors.left: parent.left
+  anchors.right: parent.right
+
+LevelBar < Label
+  id: lvlBar2
+  !text: tr('0 lvl')
+  color: yellow
+  anchors.bottom: parent.bottom
+  anchors.left: parent.left
+  anchors.right: parent.right
+
+AvatarBar < Label
+  id: AvatarBar
+  anchors.top: parent.top
+  anchors.left: parent.left
+  anchors.right: parent.right
+  width: 71
+  height: 68
+
+PlayerBarWindow < MainWindow
+  visible: false
+  id: PlayerBarWindow
+  size: 282 144
+  image-source: /images/blank
+  &save: true
+  HealthBackground
+    margin-top: 35
+    margin-right: 37
+    margin-left: 77
+    height: 20
+  ManaBackground
+    margin-right: 46
+    margin-left: 77
+    margin-top: 2
+    height: 13
+  HealthBar2
+    margin-top: 35
+    margin-right: 37
+    margin-left: 77
+    height: 20
+    image-source: /images/blank
+  ManaBar2
+    margin-right: 46
+    margin-left: 77
+    margin-top: 2
+    image-source: /images/blank
+    height: 13
+  PlayerBar
+  LevelBar
+    margin-left: 80
+    margin-bottom: 3
+  AvatarBar
+    margin-left: 7
+    margin-top: 21
+    margin-right: 180
+    margin-bottom: 25
+    width: 71
+    height: 68
+  focusable: false
+
+  Label
+    id: changePan2
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-top: 21
+    margin-left: 7
+    !text: tr('~')
+    text-align: center
+    color: red
+    !tooltip: tr('Change panel')
+    phantom: false
+    size: 14 14
+    @onClick: modules.game_healthinfo.changePanel()

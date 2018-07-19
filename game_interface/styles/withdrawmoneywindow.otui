@@ -1,0 +1,165 @@
+WithdrawMoneyWindow < MainWindow
+  id: withdrawMoneyWindow
+  !text: tr('Withdraw Money')
+  size: 400 150
+
+  SpinBox
+    id: spinBox
+    anchors.left: parent.left
+    anchors.top: parent.top
+    width: 1
+    height: 1
+    phantom: true
+    margin-top: 2
+    focusable: false
+
+  Item
+    id: item1
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 2
+    margin-left: 30
+    focusable: false
+    virtual: true
+    item-id: 3013
+    item-count: 0
+    image-color: alpha
+
+  Label
+    id: itemLabel1
+    anchors.left: parent.left
+    anchors.top: parent.top
+    margin-top: 2
+    margin-left: 30
+    width: 32
+    height: 32
+    focusable: false
+    image-source: /images/ui/xitem
+    opacity: 0
+
+  Item
+    id: item2
+    anchors.left: prev.right
+    anchors.top: parent.top
+    margin-top: 2
+    margin-left: 60
+    focusable: false
+    virtual: true
+    item-id: 3043
+    item-count: 0
+    image-color: alpha
+
+  Label
+    id: itemLabel2
+    anchors.left: item2.left
+    anchors.top: parent.top
+    margin-top: 2
+    width: 32
+    height: 32
+    focusable: false
+    image-source: /images/ui/xitem
+    opacity: 0
+
+  Item
+    id: item3
+    anchors.left: prev.right
+    anchors.top: parent.top
+    margin-top: 2
+    margin-left: 60
+    focusable: false
+    virtual: true
+    item-id: 3035
+    item-count: 0
+    image-color: alpha
+
+  Label
+    id: itemLabel3
+    anchors.left: item3.left
+    anchors.top: parent.top
+    margin-top: 2
+    width: 32
+    height: 32
+    focusable: false
+    image-source: /images/ui/xitem
+    opacity: 0
+
+  Item
+    id: item4
+    anchors.left: prev.right
+    anchors.top: parent.top
+    margin-top: 2
+    margin-left: 60
+    focusable: false
+    virtual: true
+    item-id: 3031
+    item-count: 0
+    image-color: alpha
+
+  Label
+    id: itemLabel4
+    anchors.left: item4.left
+    anchors.top: parent.top
+    margin-top: 2
+    width: 32
+    height: 32
+    focusable: false
+    image-source: /images/ui/xitem
+    opacity: 0
+
+  HorizontalScrollBar
+    id: countScrollBar1
+    anchors.left: parent.left
+    anchors.top: item4.bottom
+    margin-top: 10
+    width: 90
+    focusable: false
+
+  HorizontalScrollBar
+    id: countScrollBar2
+    anchors.left: prev.right
+    anchors.top: item4.bottom
+    margin-top: 10
+    margin-left: 4
+    width: 90
+    focusable: false
+
+  HorizontalScrollBar
+    id: countScrollBar3
+    anchors.left: prev.right
+    anchors.top: item4.bottom
+    margin-top: 10
+    margin-left: 4
+    width: 90
+    focusable: false
+
+  HorizontalScrollBar
+    id: countScrollBar4
+    anchors.left: prev.right
+    anchors.top: item4.bottom
+    margin-top: 10
+    margin-left: 4
+    width: 90
+    focusable: false
+
+  Button
+    id: buttonCancel
+    !text: tr('Cancel')
+    height: 20
+    anchors.left: parent.horizontalCenter
+    anchors.right: parent.right
+    anchors.top: countScrollBar4.bottom
+    margin-top: 17
+    focusable: false
+    color: red
+
+  Button
+    id: buttonOk
+    !text: tr('Ok')
+    height: 20
+    anchors.right: parent.horizontalCenter
+    anchors.left: parent.left
+    anchors.top: countScrollBar4.bottom
+    margin-top: 17
+    margin-right: 6
+    focusable: false
+    color: green
